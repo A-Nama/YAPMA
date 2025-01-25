@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from app.classifier import classify_prompt
+from classifier import classify_prompt
 import logging
+import uvicorn
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -26,3 +27,6 @@ def classify(input: PromptInput):
 @app.get("/health")
 def health_check():
     return {"status": "healthy"}
+
+if __name__ == '__main__':
+    uvicorn.run(app=app)
