@@ -4,6 +4,15 @@ from pydantic import BaseModel
 from classifier import classify_prompt
 import logging
 import uvicorn
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+# Read port from environment, with a fallback to 8000
+PORT = int(os.getenv("PORT", 8000))
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -36,5 +45,5 @@ def classify(input: PromptInput):
 def health_check():
     return {"status": "healthy"}
 
-if __name__ == '__main__':
-    uvicorn.run(app=app)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
