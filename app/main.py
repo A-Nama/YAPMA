@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from app.classifier import classify_prompt
+from classifier import classify_prompt
 import logging
 import uvicorn
 
