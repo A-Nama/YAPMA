@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Backend API URL
-API_URL = "http://backendforyapma.streamlit.com/classify" 
+API_URL = "https://yapma.onrender.com" 
 
 st.title("YAPMA: Your AI Prompt Moderation Assistant 🎭")
 
