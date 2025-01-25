@@ -25,23 +25,19 @@ We’re giving AI a moral compass and a Gen Z vibe! 🌟 YAPMA sniffs out shady 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
-
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+- Python 
+- Streamlit, FastAPI
+- Google-generativeai, Python-dotenv, Requests, Transformers
+- Render
 
 ### Implementation
 For Software:
 # Installation
-[commands]
+pip install -r requirements.txt
 
 # Run
-[commands]
+uvicorn app.main:app --reload
+streamlit run frontend\app.py
 
 ### Project Documentation
 For Software:
@@ -59,28 +55,6 @@ For Software:
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
 *Add caption explaining your workflow*
-
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Team](Add photo of your team here)
-
-
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
 
 ### Project Demo
 # Video
