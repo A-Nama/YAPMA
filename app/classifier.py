@@ -4,14 +4,29 @@ from transformers import pipeline
 MODEL_NAME = "unitary/toxic-bert"
 classifier = pipeline("text-classification", model=MODEL_NAME)
 
-label_mapping = {0: "Acceptable", 1: "Shady", 2: "Unacceptable"}
+# Map model labels to custom labels
+label_mapping = {
+    "toxic": "Unacceptable",
+    "non-toxic": "Acceptable"
+}
 
 def classify_prompt(prompt):
     try:
+        # Classify the input prompt
         result = classifier(prompt)
-        label_id = int(result[0]["label"].split("_")[-1])  # Extract label ID
-        label = label_mapping.get(label_id, "Unknown")
-        confidence = result[0]["score"]
-        return {"label": label, "confidence": confidence}
+
+        # Extract label and confidence
+        if result:
+            model_label = result[0]["label"]  # Model label (e.g., "toxic", "non-toxic")
+            confidence = result[0]["score"]  # Confidence score
+            
+            # Map model label to custom label
+            custom_label = label_mapping.get(model_label, "Shady")
+        else:
+            # Handle cases where no label is returned
+            custom_label = "Acceptable"
+            confidence = 1.0  # Assume full confidence for acceptable prompts
+
+        return {"label": custom_label, "confidence": confidence}
     except Exception as e:
         return {"error": str(e)}
