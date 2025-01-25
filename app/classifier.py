@@ -33,7 +33,7 @@ def classify_prompt(prompt):
             print(f"Model label: {model_label}, Confidence: {confidence}")  # Log each result
 
             # If the label is "toxic" and confidence is high, classify as "Unacceptable"
-            if model_label == "toxic" and confidence > 0.5:  # Adjust threshold as needed
+            if model_label == "toxic" and confidence > 0.5:  
                 final_label = "Unacceptable"
                 final_confidence = confidence
                 break  # Stop iterating once we find a high-confidence "toxic" label
