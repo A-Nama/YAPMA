@@ -56,7 +56,7 @@ def get_genz_message(label):
 
 def post_request_to_api(user_prompt):
     # Define the API URL
-    API_URL = "http://127.0.0.1:8000/classify"  
+    API_URL = "https://yapma.onrender.com/classify"  
 
     # Prepare the request payload
     payload = {"prompt": user_prompt}
