@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Backend API URL
-API_URL = "127.0.0.1:58890" 
+API_URL = "http://127.0.0.1:8000/classify" 
 
 st.title("YAPMA: Your AI Prompt Moderation Assistant 🎭")
 
