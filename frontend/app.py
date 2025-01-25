@@ -18,7 +18,11 @@ if st.button("Moderate Prompt"):
             if "label" in data:
                 st.markdown(f"### Classification: **{data['label']}**")
                 st.markdown(f"**Confidence:** {data['confidence']:.2f}")
-                st.success(data.get("genz_message", "✨ Keep it ethical, bestie!"))
+
+                # Display GenZ messages
+                genz_messages = data.get("genz_message", ["✨ Keep it ethical, bestie!"])
+                for message in genz_messages:
+                    st.success(message)
             else:
                 st.error(data.get("error", "An error occurred!"))
         else:
