@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+transformers
+torch
+streamlit
+requests
+python-dotenv
+google-generativeai
