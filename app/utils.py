@@ -1,8 +1,11 @@
 import os
 import google.generativeai as genai
 import requests
+import logging
 
-# if running locally include: from dotenv import load_dotenv
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Configure the Gemini API
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -47,25 +50,26 @@ def get_genz_message(label):
             return response.text.strip().split("\n")  # Split into individual messages
         else:
             return default_messages.get(label, ["🤔 Something went wrong!"])
-    except Exception:
+    except Exception as e:
+        logger.error(f"Error generating GenZ message: {e}")
         return ["🤔 Something went wrong!"]
 
 def post_request_to_api(user_prompt):
-    # API Key-based authentication, no need for a URL if we're calling the Gemini API directly
+    # Define the API URL
+    API_URL = "http://127.0.0.1:8000/classify"  
+
+    # Prepare the request payload
     payload = {"prompt": user_prompt}
 
     try:
-        # Call the Gemini API directly using the API key
-        response = requests.post(
-            "https://api.generativeai.google.com/v1beta2/generate",  # Example URL, adjust if needed
-            headers={"Authorization": f"Bearer {os.getenv('GEMINI_API_KEY')}", "Content-Type": "application/json"},
-            json=payload
-        )
+        # Send POST request
+        response = requests.post(API_URL, json=payload)
 
         # Check if the response was successful
         if response.status_code == 200:
-            return response.text  # Return the plain text response
+            return response.json()  # Assuming the API returns a JSON response
         else:
-            return {"error": "Failed to classify the prompt."}
+            return {"error": f"Failed to classify the prompt. Status code: {response.status_code}"}
     except requests.exceptions.RequestException as e:
+        logger.error(f"Request failed: {e}")
         return {"error": f"Request failed: {str(e)}"}
