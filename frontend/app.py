@@ -183,22 +183,12 @@ div.stButton button {
 }
 
 
+
 /* Importing Playfair Display font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-<script>
-    const button = document.querySelector('div.stButton button');
-    button.addEventListener('click', function() {
-        button.style.backgroundColor = '#053473';
-        button.style.borderColor = '#053473';
-        button.style.color = 'black';
-    });
-</script>
 </style>
 """
 st.markdown(page_bg_css, unsafe_allow_html=True)
-
-
-
 
 # Logo section
 logo_url = "https://i.imgur.com/TG4wo53.png"
