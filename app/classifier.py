@@ -15,12 +15,11 @@ label_mapping = {
     "non-toxic": "Acceptable",
 }
 
-
 def classify_prompt(prompt):
     try:
         # Classify the input prompt
         results = classifier(prompt)
-        print("Raw model output:", results)  # Log the raw output
+        logger.info(f"Raw model output: {results}")  # Log the raw output
 
         # Initialize variables to store the final label and confidence
         final_label = "Acceptable"
@@ -30,7 +29,7 @@ def classify_prompt(prompt):
         for result in results:
             model_label = result["label"]
             confidence = result["score"]
-            print(f"Model label: {model_label}, Confidence: {confidence}")  # Log each result
+            logger.info(f"Model label: {model_label}, Confidence: {confidence}")  # Log each result
 
             # If the label is "toxic" and confidence is high, classify as "Unacceptable"
             if model_label == "toxic" and confidence > 0.5:  # Adjust threshold as needed

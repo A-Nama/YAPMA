@@ -40,8 +40,12 @@ def classify(input: PromptInput):
     if "error" in classification_result:
         raise HTTPException(status_code=500, detail=classification_result["error"])
 
-    # Generate Gen Z-styled message using the classification label
-    genz_message = get_genz_message(classification_result["label"])
+    # Generate Gen Z-styled message using the classification label and the actual prompt
+    genz_message = get_genz_message(classification_result["label"], input.prompt)
+
+    # Handle the case where genz_message is None
+    if genz_message is None:
+        raise HTTPException(status_code=500, detail="Failed to generate Gen Z messages.")
 
     # Prepare the response to include the label, confidence, and the generated message
     response = {
