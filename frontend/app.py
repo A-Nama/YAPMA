@@ -7,18 +7,17 @@ API_URL = "http://127.0.0.1:8000/classify"
 # Add custom CSS for styling
 page_bg_css = """
 <style>
-/* General font styling for the entire app */
 * {
-    font-family: 'Playfair Display', serif;  /* Apply Playfair Display font globally */
+    font-family: 'Playfair Display', serif;  
 }
 
 /* General app background */
 [data-testid="stAppViewContainer"] {
-    background-color: #e4e2dd;  /* Light gray background */
-    padding: -100px;  /* Add padding around the app */
+    background-color: #e4e2dd; 
+    padding: -100px; 
 }
 
-/* Center-align the main container */
+
 [data-testid="stVerticalBlock"] {
     align-items: center;
     justify-content: center;
@@ -32,28 +31,26 @@ page_bg_css = """
 
 /* Keyframes for the initial animation */
 @keyframes initialAnimation {
-    0% { transform: scale(0.8); opacity: 0; }      /* Start smaller and invisible */
-    50% { transform: scale(1.1); opacity: 1; }     /* Scale up and become visible */
-    100% { transform: scale(1); opacity: 1; }      /* Final normal size */
-}
+    0% { transform: scale(0.8); opacity: 0; }      
+    50% { transform: scale(1.1); opacity: 1; }     
+    100% { transform: scale(1); opacity: 1; }     
 
 /* Hover animation (activates when the mouse hovers over the logo) */
 .logo-container img:hover {
-    animation: hoverAnimation 0.5s ease-out forwards;  /* Hover effect */
+    animation: hoverAnimation 0.5s ease-out forwards; 
 }
 
 /* Keyframes for the hover animation */
 @keyframes hoverAnimation {
-    0% { transform: scale(1); }         /* Normal size */
-    50% { transform: scale(1.2); }      /* Scale up */
-    100% { transform: scale(1); }       /* Return to normal size */
+    0% { transform: scale(1); }         
+    50% { transform: scale(1.2); }      
+    100% { transform: scale(1); }      
 }
 
-/* Change the font and color for "Enter your prompt here" */
 h3 {
-    color: black !important;  /* Set the color to black */
-    font-size: 24px;  /* Set font size */
-    font-family: 'Playfair Display', serif;  /* Apply custom font specifically here */
+    color: black !important;  
+    font-size: 24px;  
+    font-family: 'Playfair Display', serif; 
 }
 
 /* Adjust the logo */
@@ -66,43 +63,43 @@ h3 {
 
 /* Stylish text area box design (without gradient) */
 div.stTextArea textarea {
-    color: black !important;  /* Text color inside textarea */
-    background-color: #f2f2f2 !important;  /* Light gray background (solid color) */
-    border: 2px solid #ccc !important;  /* Soft border */
-    padding: 20px;  /* Add padding for better spacing */
-    border-radius: 12px;  /* Rounded corners */
-    font-size: 18px;  /* Font size inside the text area */
-    font-family: 'Playfair Display', serif;  /* Apply custom font */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  /* Subtle shadow */
-    width: 80%;  /* Set width of the text area */
-    margin: 20px auto;  /* Center-align the text area */
-    transition: all 0.3s ease-in-out;  /* Smooth transition for hover/focus effects */
+    color: black !important; 
+    background-color: #f2f2f2 !important; 
+    border: 2px solid #ccc !important; 
+    padding: 20px; 
+    border-radius: 12px;  
+    font-size: 18px; 
+    font-family: 'Playfair Display', serif;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    width: 80%;  
+    margin: 20px auto;  
+    transition: all 0.3s ease-in-out;  
 }
 
 /* Add hover effect on text area */
 div.stTextArea textarea:hover {
-    transform: scale(1.05);  /* Slightly enlarge the text area when hovered */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Add more shadow on hover */
+    transform: scale(1.05); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  
 }
 
 /* Focus effect */
 div.stTextArea textarea:focus {
-    background-color: #e0e0e0 !important;  /* Lighter gray background on focus */
-    outline: none;  /* Remove the default outline */
-    border-radius: 12px;  /* Keep the rounded corners */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);  /* Stronger shadow on focus */
+    background-color: #e0e0e0 !important;  
+    outline: none; 
+    border-radius: 12px;  
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);  
 }
 
 /* Placeholder styling */
 div.stTextArea textarea::placeholder {
-    color: #245698 !important;  /* Black placeholder text */
-    font-style: italic;  /* Italicize placeholder text */
+    color: #245698 !important; 
+    font-style: italic; 
 }
 
 /* Button alignment */
 div.stButton button {
-    width: 200px;  /* Set button width */
-    margin: 20px auto;  /* Center-align button */
+    width: 200px;  
+    margin: 20px auto;  
     display: block;
 }
 
