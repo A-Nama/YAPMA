@@ -16,13 +16,17 @@ if st.button("Moderate Prompt"):
         if response.status_code == 200:
             data = response.json()
             if "label" in data:
+                # Display the classification result
                 st.markdown(f"### Classification: **{data['label']}**")
                 st.markdown(f"**Confidence:** {data['confidence']:.2f}")
 
-                # Display GenZ messages
-                genz_messages = data.get("genz_message", ["✨ Keep it ethical, bestie!"])
+                # Display AI-generated Gen Z messages
+                genz_messages = data.get("genz_message", [])
                 for message in genz_messages:
-                    st.success(message)
+                    if data["label"] == "Acceptable":
+                        st.success(message)  # Show messages for Acceptable prompts
+                    else:
+                        st.error(message)  # Show warnings for Unacceptable prompts
             else:
                 st.error(data.get("error", "An error occurred!"))
         else:
