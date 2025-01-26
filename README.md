@@ -53,21 +53,19 @@ For Software:
 *Add caption explaining what this shows*
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+![Workflow](https://i.imgur.com/knwvezq.png)
+User inputs flow from Streamlit UI to FastAPI backend, where DistilBERT classifies prompts as Acceptable or Unacceptable, with GenZ feedback according to it.
 
 ### Project Demo
 # Video
 [Add your demo video link here]
 *Explain what the video demonstrates*
 
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- [Aisha Nama]: [Backend development, integrated pre-trained DistilBERT model for prompt moderation, version control.]
+- [Anjana Sankar]: [Backend development, integrated Gemini API for GenZ feedback generation, handled hosting.]
+- [Majida Nasrin]: [UI/UX design, Streamlit frontend development, created content and media for documentation.]
 
 ---
 Made with ❤️ by Delulu
