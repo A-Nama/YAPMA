@@ -64,9 +64,9 @@ User inputs flow from Streamlit UI to FastAPI backend, where DistilBERT classifi
 
 
 ## Team Contributions
-- [Aisha Nama]: [Backend development, integrated pre-trained DistilBERT model for prompt moderation, version control.]
-- [Anjana Sankar]: [Backend development, integrated Gemini API for GenZ feedback generation, handled hosting.]
-- [Majida Nasrin]: [UI/UX design, Streamlit frontend development, created content and media for documentation.]
+- Aisha Nama: [Backend development, integrated pre-trained DistilBERT model for prompt moderation, version control.]
+- Anjana Sankar: [Backend development, integrated Gemini API for GenZ feedback generation, handled hosting.]
+- Majida Nasrin: [UI/UX design, Streamlit frontend development, created content and media for documentation.]
 
 ---
 Made with ❤️ by Delulu
