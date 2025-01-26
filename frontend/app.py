@@ -14,10 +14,24 @@ page_bg_css = """
 
 /* General app background */
 [data-testid="stAppViewContainer"] {
-    background-color: #e4e2dd;  /* Light gray background */
+    background-color: #b8b1a0;  /* Light gray background */
     padding: -100px;  /* Add padding around the app */
 }
 
+
+
+/* Adding grainy texture effect using a CSS noise pattern */
+[data-testid="stAppViewContainer"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+    pointer-events: none;
+    
+}
 /* Center-align the main container */
 [data-testid="stVerticalBlock"] {
     align-items: center;
@@ -67,7 +81,7 @@ h3 {
 /* Stylish text area box design (without gradient) */
 div.stTextArea textarea {
     color: black !important;  /* Text color inside textarea */
-    background-color: #f2f2f2 !important;  /* Light gray background (solid color) */
+    background-color: #dcd9d2 !important;  /* Light gray background (solid color) */
     border: 2px solid #ccc !important;  /* Soft border */
     padding: 20px;  /* Add padding for better spacing */
     border-radius: 12px;  /* Rounded corners */
@@ -87,7 +101,7 @@ div.stTextArea textarea:hover {
 
 /* Focus effect */
 div.stTextArea textarea:focus {
-    background-color: #e0e0e0 !important;  /* Lighter gray background on focus */
+    background-color: #b8b1a0 !important;  /* Lighter gray background on focus */
     outline: none;  /* Remove the default outline */
     border-radius: 12px;  /* Keep the rounded corners */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);  /* Stronger shadow on focus */
@@ -99,18 +113,92 @@ div.stTextArea textarea::placeholder {
     font-style: italic;  /* Italicize placeholder text */
 }
 
-/* Button alignment */
+/* Button styling */
 div.stButton button {
-    width: 200px;  /* Set button width */
-    margin: 20px auto;  /* Center-align button */
-    display: block;
+    width: 200px;  /* Set the width of the button */
+    margin: 20px auto;  /* Keep button centered */
+    display: block;  /* Ensure it stays centered as a block element */
+    background-color: #053473;  /* Initial background color */
+    color: white;  /* Text color */
+    border: 2px solid #053473;  /* Border color */
+    border-radius: 5px;  /* Rounded corners */
+    padding: 10px 20px;  /* Padding inside the button */
+    font-size: 16px;  /* Font size of the button text */
+    font-family: 'Playfair Display', serif;  /* Font for the button text */
+    cursor: pointer;  /* Change cursor to pointer when hovered */
+    transition: all 0.3s ease;  /* Smooth transition for hover/focus effect */
 }
+
+/* Button hover effect */
+div.stButton button:hover {
+    background-color: #245698;
+    border-color: #245698;
+}
+
+/* Button active (on click) effect */
+div.stButton button:active {
+    background-color: #053473;
+    border-color: #053473;
+    color: black;
+}
+
+/* Keyframes for the pulse effect */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }    /* Initial state */
+    50% { transform: scale(1.05); opacity: 1; }  /* Slightly larger and more visible */
+    100% { transform: scale(1); opacity: 0.8; }  /* Return to original size */
+}
+
+/* Apply the pulse effect on the text area, run once */
+div.stTextArea textarea {
+    color: black !important;  /* Text color inside textarea */
+    background-color: #dcd9d2 !important;  /* Light gray background (solid color) */
+    border: 2px solid #ccc !important;  /* Soft border */
+    padding: 20px;  /* Add padding for better spacing */
+    border-radius: 12px;  /* Rounded corners */
+    font-size: 18px;  /* Font size inside the text area */
+    font-family: 'Playfair Display', serif;  /* Apply custom font */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  /* Subtle shadow */
+    width: 80%;  /* Set width of the text area */
+    margin: 20px auto;  /* Center-align the text area */
+    transition: all 0.3s ease-in-out;  /* Smooth transition for hover/focus effects */
+    animation: pulse 1.5s ease-out forwards;  /* Pulse effect runs once */
+}
+
+/* Apply the pulse effect on the button, run once */
+div.stButton button {
+    width: 200px;  /* Set the width of the button */
+    margin: 20px auto;  /* Keep button centered */
+    display: block;  /* Ensure it stays centered as a block element */
+    background-color: #053473;  /* Initial background color */
+    color: white;  /* Text color */
+    border: 2px solid #053473;  /* Border color */
+    border-radius: 5px;  /* Rounded corners */
+    padding: 10px 20px;  /* Padding inside the button */
+    font-size: 16px;  /* Font size of the button text */
+    font-family: 'Playfair Display', serif;  /* Font for the button text */
+    cursor: pointer;  /* Change cursor to pointer when hovered */
+    transition: all 0.3s ease;  /* Smooth transition for hover/focus effect */
+    animation: pulse 1.5s ease-out forwards;  /* Pulse effect runs once */
+}
+
 
 /* Importing Playfair Display font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+<script>
+    const button = document.querySelector('div.stButton button');
+    button.addEventListener('click', function() {
+        button.style.backgroundColor = '#053473';
+        button.style.borderColor = '#053473';
+        button.style.color = 'black';
+    });
+</script>
 </style>
 """
 st.markdown(page_bg_css, unsafe_allow_html=True)
+
+
+
 
 # Logo section
 logo_url = "https://i.imgur.com/TG4wo53.png"
