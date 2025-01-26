@@ -44,15 +44,15 @@ streamlit run frontend\app.py
 ### Project Documentation
 For Software:
 
-# Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+# Screenshots 
+![Screenshot1](https://i.imgur.com/f606Ljh.png)
+*Home page of YAPMA*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot2](https://i.imgur.com/EZaYORY.png)
+*YAPMA dealing with unacceptable comments*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot3](https://i.imgur.com/FTzOASf.png)
+*YAPMA dealing with acceptable comments*
 
 # Diagrams
 ![Workflow](https://i.imgur.com/knwvezq.png)
@@ -60,8 +60,8 @@ User inputs flow from Streamlit UI to FastAPI backend, where DistilBERT classifi
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+[https://drive.google.com/file/d/1cFuntqj6_IhYutVYxijsEt1OIjSstrj1/view?usp=sharing]
+*The video demonstrates how YAPMA classifies the prompts as Acceptable and Unacceptablewith a certain confidence level.*
 
 
 ## Team Contributions
