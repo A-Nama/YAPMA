@@ -12,11 +12,10 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Generation configuration for the chatbot
 generation_config = {
-    "temperature": 2,
+    "temperature": 1.5,  # Increase temperature for more randomness
     "top_p": 0.95,
     "top_k": 64,
     "max_output_tokens": 8192,
-    "response_mime_type": "text/plain",
 }
 
 # Initialize the generative model
@@ -24,35 +23,44 @@ model = genai.GenerativeModel(
     model_name="gemini-1.5-flash",
     generation_config=generation_config,
     system_instruction=(
-        "You are an empathetic, optimistic AI assistant specializing in ethical AI practices. Your role is to generate Gen Z-styled messages for classifying user prompts into categories: Acceptable, Shady, and Unacceptable.\n\nKey guidelines:\n\n- For 'Acceptable' prompts, provide positive and encouraging messages that validate the appropriateness of the input.\n- For 'Shady' prompts, generate gentle but firm warnings, suggesting that the input is questionable.\n- For 'Unacceptable' prompts, create strong, clear rejections, emphasizing the need to avoid such inputs.\n- Maintain a casual, Gen Z tone with emojis and friendly language.\n"
+        "You are an empathetic, optimistic AI assistant specializing in ethical AI practices. Your role is to generate Gen Z-styled messages for classifying user prompts into categories: Acceptable and Unacceptable.\n\n"
+        "Key guidelines:\n\n"
+        "- For 'Acceptable' prompts, provide positive and encouraging messages that validate the appropriateness of the input.\n"
+        "- For 'Unacceptable' prompts, create strong, clear rejections, emphasizing the need to avoid such inputs.\n"
+        "- Maintain a casual, Gen Z tone with emojis and friendly language.\n"
+        "- Be creative and generate completely random but contextually relevant messages.\n"
     )
 )
 
-def get_genz_message(label):
+def get_genz_message(label, prompt):
     # Define the instruction for generating messages based on the label
     instructions = {
-        "Acceptable": "Create two short, Gen Z-styled positive comments for an acceptable prompt.",
-        "Shady": "Create two short, Gen Z-styled warnings for a slightly suspicious or questionable prompt.",
-        "Unacceptable": "Create two short, Gen Z-styled warnings for a completely inappropriate or unacceptable prompt."
+        "Acceptable": f"The following prompt is classified as 'Acceptable'. Create a completely random but contextually relevant, Gen Z-styled positive comments for this prompt: '{prompt}'.",
+        "Unacceptable": f"The following prompt is classified as 'Unacceptable'. Create a completely random but contextually relevant, Gen Z-styled warnings for this prompt: '{prompt}'."
     }
 
-    # Default messages for each label
-    default_messages = {
-        "Acceptable": ["✨ Go ahead, bestie! Your vibes are immaculate.", "All clear—keep being awesome!"],
-        "Shady": ["👀 Uh oh, this seems kinda sus. Tread carefully.", "Hmmm... not cool, rethink this maybe?"],
-        "Unacceptable": ["🚨 Stop right there! This is way out of bounds.", "🤢 Nope. This isn’t it, chief."]
-    }
 
     try:
         # Generate the response using the appropriate instruction
         if label in instructions:
-            response = model.generate_text(instructions[label])
-            return response.text.strip().split("\n")  # Split into individual messages
+            logger.info(f"Generating Gemini response for label: {label}")
+            logger.info(f"Prompt: {prompt}")
+            response = model.generate_content(instructions[label])  # Use generate_content instead of generate_text
+            logger.info(f"Full Gemini API Response: {response}")  # Log the full response
+
+            if response and hasattr(response, "text"):
+                # Log the response for debugging
+                logger.info(f"Gemini API Response Text: {response.text}")
+                return response.text.strip().split("\n")  # Split into individual messages
+            else:
+                logger.error("No text in the Gemini API response.")
+                return None  # Return None if no text is generated
         else:
-            return default_messages.get(label, ["🤔 Something went wrong!"])
+            logger.error(f"Invalid label provided: {label}")
+            return None  # Return None for invalid labels
     except Exception as e:
         logger.error(f"Error generating GenZ message: {e}")
-        return ["🤔 Something went wrong!"]
+        return None  # Return None if an error occurs
 
 def post_request_to_api(user_prompt):
     # Define the API URL
@@ -69,6 +77,7 @@ def post_request_to_api(user_prompt):
         if response.status_code == 200:
             return response.json()  # Assuming the API returns a JSON response
         else:
+            logger.error(f"Failed to classify the prompt. Status code: {response.status_code}")
             return {"error": f"Failed to classify the prompt. Status code: {response.status_code}"}
     except requests.exceptions.RequestException as e:
         logger.error(f"Request failed: {e}")
