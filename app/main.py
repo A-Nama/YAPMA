@@ -35,11 +35,26 @@ def classify(input: PromptInput):
     if not input.prompt.strip():
         raise HTTPException(status_code=400, detail="Prompt cannot be empty.")
 
-    result = classify_prompt(input.prompt)
-    if "error" in result:
-        raise HTTPException(status_code=500, detail=result["error"])
+     # Classify the prompt
+    classification_result = classify_prompt(input.prompt)
+    if "error" in classification_result:
+        raise HTTPException(status_code=500, detail=classification_result["error"])
 
-    return result
+    # Generate Gen Z-styled message using the classification label and the actual prompt
+    genz_message = get_genz_message(classification_result["label"], input.prompt)
+
+    # Handle the case where genz_message is None
+    if genz_message is None:
+        raise HTTPException(status_code=500, detail="Failed to generate Gen Z messages.")
+
+    # Prepare the response to include the label, confidence, and the generated message
+    response = {
+        "label": classification_result["label"],
+        "confidence": classification_result["confidence"],
+        "genz_message": genz_message,  # AI-generated messages
+    }
+
+    return response
 
 @app.get("/health")
 def health_check():
